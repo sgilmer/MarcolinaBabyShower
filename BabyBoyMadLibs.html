@@ -1,79 +1,210 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Baby Shower Mad Libs</title>
+
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:linear-gradient(#dff3ff,#f7fbff);overflow-x:hidden}
-.cloud{z-index:-1;position:fixed;background:white;border-radius:50px;opacity:.7;animation:float 30s linear infinite}
-.c1{width:120px;height:40px;top:40px;left:-150px}.c2{width:180px;height:55px;top:140px;left:-220px;animation-duration:45s}
-@keyframes float{to{transform:translateX(130vw)}}
-.card{max-width:800px;margin:40px auto;background:#fff;padding:25px;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.15)}
-h1{text-align:center;color:#4b8fd8}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-input{padding:10px;border-radius:8px;border:1px solid #ccc}
-button{margin:12px 6px;padding:12px 18px;border:none;border-radius:8px;background:#4b8fd8;color:#fff;font-weight:bold;cursor:pointer}
-#story{display:none;white-space:pre-wrap;line-height:1.6}
-.confetti{position:fixed;top:-10px;width:8px;height:8px;animation:fall 3s linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
-</style></head><body>
-<div class="cloud c1"></div><div class="cloud c2"></div>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:linear-gradient(#dff3ff,#f7fbff);
+overflow-x:hidden
+}
+
+.cloud{
+z-index:-1;
+position:fixed;
+background:white;
+border-radius:50px;
+opacity:.7;
+animation:float 30s linear infinite
+}
+
+.c1{
+width:120px;
+height:40px;
+top:40px;
+left:-150px
+}
+
+.c2{
+width:180px;
+height:55px;
+top:140px;
+left:-220px;
+animation-duration:45s
+}
+
+@keyframes float{
+to{transform:translateX(130vw)}
+}
+
+.card{
+max-width:800px;
+margin:40px auto;
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.15)
+}
+
+h1{
+text-align:center;
+color:#4b8fd8
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+input{
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+width:90%
+}
+
+button{
+margin:12px 6px;
+padding:12px 18px;
+border:none;
+border-radius:8px;
+background:#4b8fd8;
+color:#fff;
+font-weight:bold;
+cursor:pointer
+}
+
+#story{
+display:none;
+white-space:pre-wrap;
+line-height:1.6;
+margin-top:20px;
+background:#f7fbff;
+padding:15px;
+border-radius:12px
+}
+
+.confetti{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+animation:fall 3s linear forwards
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg)
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+
 <div class="card">
-<h1>🍼 Baby Boy Marcolina 💙</h1><h2 style='text-align:center;color:#6aa6e8;margin-top:-10px'>Mad Libs</h1>
-<p>Everyone is helping write a special letter to Baby Boy Marcolina… without knowing exactly what you’re creating. Fill in the silly words below, click "Create Story," and reveal the funny welcome letter waiting for him!</p>
+
+<h1>🍼 Baby Boy Marcolina 💙</h1>
+
+<h2 style="text-align:center;color:#6aa6e8;margin-top:-10px">
+Mad Libs
+</h2>
+
+<p>
+Everyone is helping write a special letter to Baby Boy Marcolina… without knowing exactly what you’re creating. Fill in the silly words below, click "Create Story," and reveal the funny welcome letter waiting for him!
+</p>
+
 <div class="grid" id="f"></div>
+
 <div style="text-align:center">
 <button onclick="make()">Create Story</button>
 <button id="dl" style="display:none" onclick="downloadStory()">Download My Story</button>
 <button onclick="location.reload()">Play Again</button>
 </div>
+
 <div id="story"></div>
+
 </div>
+
+
 <script>
+
 const labels=[
+
 ["verbing","Verb (ending in -ing)"],
-["noun","None"],
+["noun","Plural noun"],
 ["object","Object"],
 ["noun2","Noun"],
-["buddy","Animal"],
+["creature","Animal"],
 ["yell","Exclamation"],
 ["body","Body part"],
 ["power","Talent"],
-["verb","Activity"],
-["clothing","Item of clothing"],
+["verb","Verb"],
+["clothing","Object"],
 ["profession","Job"],
-["skill","Random skill"],
-["gross","Something gross a baby might do"],
+["skill","Skill"],
+["gross","Gross verb"],
 ["place","Place"],
 ["name","Your name"]
+
 ];
 
+
 const f=document.getElementById("f");
+
 labels.forEach(x=>f.innerHTML+=`
 <div>
 <label>${x[1]}<br>
 <input id="${x[0]}">
 </label>
-</div>`);
+</div>
+`);
+
 
 function val(id){
-return document.getElementById(id).value||"____";
+return document.getElementById(id).value || "____";
 }
 
+
 function confetti(){
+
 for(let i=0;i<120;i++){
+
 let d=document.createElement("div");
+
 d.className="confetti";
+
 d.style.left=Math.random()*100+"vw";
+
 d.style.background=`hsl(${180+Math.random()*60},80%,60%)`;
+
 d.style.animationDelay=(Math.random()*.6)+"s";
+
 document.body.appendChild(d);
+
 setTimeout(()=>d.remove(),3500);
+
 }
+
 }
+
 
 let finalText="";
 
+
 function make(){
+
 confetti();
+
 
 finalText=`Dear Baby Boy Marcolina,
 
@@ -81,7 +212,7 @@ We are so excited for your arrival!
 
 Before you even enter this world, your parents have already learned that raising a baby requires lots of ${val("verbing")}, a surprising amount of ${val("noun")}, and at least one emergency ${val("object")}.
 
-Your first few months will be filled with ${val("activity")}, adorable ${val("noun2")}, and wondering why your parents keep calling you their little ${val("buddy")}.
+Your first few months will be filled with ${val("verbing")}, adorable ${val("noun2")}, and wondering why your parents keep calling you their little ${val("creature")}.
 
 When you cry, your parents will try everything: rocking, singing, dancing, and eventually offering you a ${val("object")} while yelling "${val("yell")}!"
 
@@ -99,17 +230,31 @@ Love,
 
 ${val("name")}`;
 
+
 let s=document.getElementById("story");
+
 s.style.display="block";
+
 s.textContent=finalText;
 
 document.getElementById("dl").style.display="inline-block";
+
 }
 
+
 function downloadStory(){
+
 const a=document.createElement('a');
+
 a.href=URL.createObjectURL(new Blob([finalText],{type:'text/plain'}));
+
 a.download="Baby_Boy_Marcolina_Mad_Lib.txt";
+
 a.click();
+
 }
-</script></body></html>
+
+</script>
+
+</body>
+</html>
