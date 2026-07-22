@@ -29,45 +29,91 @@ button{margin:12px 6px;padding:12px 18px;border:none;border-radius:8px;backgroun
 </div>
 <script>
 const labels=[
-["person","Person on this Zoom"],["celeb","Celebrity"],["animal","Animal"],["baby","Baby item"],["food","Food"],["num","Number"],["color","Color"],["adj","Adjective"],["sadj","Silly adjective"],["ing","Verb ending in -ing"],["past","Past tense verb"],["body","Body part"],["place","Place"],["house","Household object"],["emotion","Emotion"],["wow","Exclamation"],["holiday","Holiday"],["power","Superpower"],["drink","Drink"],["noun","Noun"]];
+["adj","Funny adjective"],
+["activity","Random baby activity/thing"],
+["buddy","Cuddle buddy or person"],
+["creature","Tiny ridiculous creature/object"],
+["num","Number"],
+["object","Random object"],
+["person","Person's name"],
+["clothing","Funny clothing item (plural)"],
+["body","Body part"],
+["food","Food (plural)"],
+["yell","Something you would yell"],
+["power","Superpower or talent"],
+["save","Thing/person to save (plural)"],
+["verb","Verb"],
+["gross","Something gross a baby might do"],
+["personality","Adjective describing a person"],
+["signature","Your name"],
+["group","Group noun"]
+];
+
 const f=document.getElementById("f");
-labels.forEach(x=>f.innerHTML+=`<div><label>${x[1]}<br><input id="${x[0]}"></label></div>`);
-function val(id){return document.getElementById(id).value||"____";}
-function confetti(){for(let i=0;i<120;i++){let d=document.createElement("div");d.className="confetti";d.style.left=Math.random()*100+"vw";d.style.background=`hsl(${180+Math.random()*60},80%,60%)`;d.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3500);}}
+labels.forEach(x=>f.innerHTML+=`
+<div>
+<label>${x[1]}<br>
+<input id="${x[0]}">
+</label>
+</div>`);
+
+function val(id){
+return document.getElementById(id).value||"____";
+}
+
+function confetti(){
+for(let i=0;i<120;i++){
+let d=document.createElement("div");
+d.className="confetti";
+d.style.left=Math.random()*100+"vw";
+d.style.background=`hsl(${180+Math.random()*60},80%,60%)`;
+d.style.animationDelay=(Math.random()*.6)+"s";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),3500);
+}
+}
+
 let finalText="";
+
 function make(){
 confetti();
-finalText=`Dear Baby,
+
+finalText=`Dear Baby Boy Marcolina,
 
 Welcome to the world!
 
 Everyone is so excited to meet you. Your parents have spent months getting everything ready, and we already know you're going to be the most ${val("adj")} little boy around.
 
-Your days will probably include lots of ${val("ing")}, cuddles with your ${val("baby")}, and occasionally being mistaken for a tiny ${val("animal")}.
+Your days will probably include lots of ${val("activity")}, cuddles with your ${val("buddy")}, and occasionally being mistaken for a tiny ${val("creature")}.
 
-If you wake up crying for more than ${val("num")} minutes, just remember that all babies eventually calm down after being handed a ${val("house")}. At least...we hope so.
+If you wake up crying for more than ${val("num")} minutes, just remember that all babies eventually calm down after being handed a ${val("object")}. At least...we hope so.
 
-One day ${val("celeb")} will probably wish they were as cool as you, especially after they see your ${val("color")} pajamas.
+One day ${val("person")} will probably wish they were as cool as you, especially after they see your ${val("clothing")}.
 
-Whenever life gets tough, protect your ${val("body")}, eat plenty of ${val("food")}, and never forget to shout "${val("wow")}!"
+Whenever life gets tough, protect your ${val("body")}, eat plenty of ${val("food")}, and never forget to shout "${val("yell")}!"
 
-Someday you'll discover your amazing ${val("power")} and use it to save ${val("place")} from certain doom.
+Someday you'll discover your amazing ${val("power")} and use it to save ${val("save")} from certain doom.
 
-No matter where life takes you, your parents will always ${val("emotion")} every time they see your smile, even if you've just ${val("past")} all over the living room.
+No matter where life takes you, your parents will always ${val("verb")} every time they see your smile, even if you've just ${val("gross")} all over the living room.
 
-We can't wait to watch you grow into a wonderfully ${val("sadj")} person.
+We can't wait to watch you grow into a wonderfully ${val("personality")} person.
 
 Love,
 
-${val("person")}
-and the ${val("noun")}`;
-let s=document.getElementById("story");s.style.display="block";s.textContent="";
+${val("signature")}
+and the ${val("group")}`;
+
+let s=document.getElementById("story");
+s.style.display="block";
 s.textContent=finalText;
+
 document.getElementById("dl").style.display="inline-block";
 }
+
 function downloadStory(){
 const a=document.createElement('a');
 a.href=URL.createObjectURL(new Blob([finalText],{type:'text/plain'}));
-a.download="Baby_Mad_Lib.txt";a.click();
+a.download="Baby_Boy_Marcolina_Mad_Lib.txt";
+a.click();
 }
 </script></body></html>
