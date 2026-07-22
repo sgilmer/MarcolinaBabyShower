@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Baby Shower Mad Libs</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:linear-gradient(#dff3ff,#f7fbff);overflow-x:hidden}
+.cloud{z-index:-1;position:fixed;background:white;border-radius:50px;opacity:.7;animation:float 30s linear infinite}
+.c1{width:120px;height:40px;top:40px;left:-150px}.c2{width:180px;height:55px;top:140px;left:-220px;animation-duration:45s}
+@keyframes float{to{transform:translateX(130vw)}}
+.card{max-width:800px;margin:40px auto;background:#fff;padding:25px;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.15)}
+h1{text-align:center;color:#4b8fd8}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input{padding:10px;border-radius:8px;border:1px solid #ccc}
+button{margin:12px 6px;padding:12px 18px;border:none;border-radius:8px;background:#4b8fd8;color:#fff;font-weight:bold;cursor:pointer}
+#story{display:none;white-space:pre-wrap;line-height:1.6}
+.confetti{position:fixed;top:-10px;width:8px;height:8px;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+</style></head><body>
+<div class="cloud c1"></div><div class="cloud c2"></div>
+<div class="card">
+<h1>🍼 Baby Boy Marcolina 💙</h1><h2 style='text-align:center;color:#6aa6e8;margin-top:-10px'>Mad Libs</h1>
+<p>Everyone is going to help write parenting advice for Rebecca…without knowing exactly what you’re writing. First, fill in random words below.</p>
+<div class="grid" id="f"></div>
+<div style="text-align:center">
+<button onclick="make()">Create Story</button>
+<button id="dl" style="display:none" onclick="downloadStory()">Download My Story</button>
+<button onclick="location.reload()">Play Again</button>
+</div>
+<div id="story"></div>
+</div>
+<script>
+const labels=[
+["person","Person on this Zoom"],["celeb","Celebrity"],["animal","Animal"],["baby","Baby item"],["food","Food"],["num","Number"],["color","Color"],["adj","Adjective"],["sadj","Silly adjective"],["ing","Verb ending in -ing"],["past","Past tense verb"],["body","Body part"],["place","Place"],["house","Household object"],["emotion","Emotion"],["wow","Exclamation"],["holiday","Holiday"],["power","Superpower"],["drink","Drink"],["noun","Noun"]];
+const f=document.getElementById("f");
+labels.forEach(x=>f.innerHTML+=`<div><label>${x[1]}<br><input id="${x[0]}"></label></div>`);
+function val(id){return document.getElementById(id).value||"____";}
+function confetti(){for(let i=0;i<120;i++){let d=document.createElement("div");d.className="confetti";d.style.left=Math.random()*100+"vw";d.style.background=`hsl(${180+Math.random()*60},80%,60%)`;d.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3500);}}
+let finalText="";
+function make(){
+confetti();
+finalText=`Dear Baby,
+
+Welcome to the world!
+
+Everyone is so excited to meet you. Your parents have spent months getting everything ready, and we already know you're going to be the most ${val("adj")} little boy around.
+
+Your days will probably include lots of ${val("ing")}, cuddles with your ${val("baby")}, and occasionally being mistaken for a tiny ${val("animal")}.
+
+If you wake up crying for more than ${val("num")} minutes, just remember that all babies eventually calm down after being handed a ${val("house")}. At least...we hope so.
+
+One day ${val("celeb")} will probably wish they were as cool as you, especially after they see your ${val("color")} pajamas.
+
+Whenever life gets tough, protect your ${val("body")}, eat plenty of ${val("food")}, and never forget to shout "${val("wow")}!"
+
+Someday you'll discover your amazing ${val("power")} and use it to save ${val("place")} from certain doom.
+
+No matter where life takes you, your parents will always ${val("emotion")} every time they see your smile, even if you've just ${val("past")} all over the living room.
+
+We can't wait to watch you grow into a wonderfully ${val("sadj")} person.
+
+Love,
+
+${val("person")}
+and the ${val("noun")}`;
+let s=document.getElementById("story");s.style.display="block";s.textContent="";
+s.textContent=finalText;
+document.getElementById("dl").style.display="inline-block";
+}
+function downloadStory(){
+const a=document.createElement('a');
+a.href=URL.createObjectURL(new Blob([finalText],{type:'text/plain'}));
+a.download="Baby_Mad_Lib.txt";a.click();
+}
+</script></body></html>
