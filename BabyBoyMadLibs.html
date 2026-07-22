@@ -18,7 +18,7 @@ button{margin:12px 6px;padding:12px 18px;border:none;border-radius:8px;backgroun
 <div class="cloud c1"></div><div class="cloud c2"></div>
 <div class="card">
 <h1>🍼 Baby Boy Marcolina 💙</h1><h2 style='text-align:center;color:#6aa6e8;margin-top:-10px'>Mad Libs</h1>
-<p>Everyone is going to help write parenting advice for Rebecca…without knowing exactly what you’re writing. First, fill in random words below.</p>
+<p>Everyone is going to help write parenting advice for Rebecca… without knowing exactly what you’re writing. Fill in the boxes below. When you're done, click </p>
 <div class="grid" id="f"></div>
 <div style="text-align:center">
 <button onclick="make()">Create Story</button>
@@ -29,17 +29,17 @@ button{margin:12px 6px;padding:12px 18px;border:none;border-radius:8px;backgroun
 </div>
 <script>
 const labels=[
-["activity","Random baby activity/thing"],
-["adj","Funny adjective"],
+["activity","Activity"],
+["adj","Adjective"],
 ["object","Random object"],
-["creature","Tiny ridiculous creature/object"],
+["creature","Animal"],
 ["buddy","Cuddle buddy/person"],
-["yell","Something you would yell"],
+["yell","Exclamation"],
 ["body","Body part"],
-["power","Superpower/talent"],
+["power","Talent"],
 ["verb","Verb"],
-["clothing","Funny clothing item"],
-["profession","Ridiculous future job"],
+["clothing","Item of clothing"],
+["profession","Job"],
 ["skill","Random skill"],
 ["gross","Something gross a baby might do"],
 ["place","Place"],
@@ -77,7 +77,7 @@ confetti();
 
 finalText=`Dear Baby Boy Marcolina,
 
-Congratulations on arriving!
+We are so excited for your arrival!
 
 Before you even enter this world, your parents have already learned that raising a baby requires lots of ${val("activity")}, a surprising amount of ${val("adj")}, and at least one emergency ${val("object")}.
 
